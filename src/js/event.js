@@ -61,14 +61,18 @@ noticeCloseButton.addEventListener('click', () => {
 });
 
 // 이전 서비스 이동 드롭다운 박스 여닫기
+const previousDropdown = document.querySelector('.previous-dropdown');
 const previousButton = document.querySelector('.btn-previous');
 
-previousButton.addEventListener('click', () => {
-    previousButton.classList.toggle('active');
+previousDropdown.addEventListener('click', (e) => {
+    if (e.target == previousButton) {
+        previousButton.classList.toggle('active');
+    }
 });
 
 window.addEventListener('click', (e) => {
-    if (!previousButton.contains(e.target)) {
-        previousButton.classList.toggle('active');
+    if (e.target == previousDropdown || !previousDropdown.contains(e.target)) {
+        previousButton.classList.contains('active') &&
+            previousButton.classList.remove('active');
     }
 });
