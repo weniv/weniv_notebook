@@ -1,0 +1,35 @@
+.header {
+    position: sticky;
+    height: 7rem;
+    z-index: 10;
+
+    .header-btn-list {
+        display: flex;
+        align-items: center;
+        gap: 1.6rem;
+
+        button {
+            display: block;
+        }
+    }
+
+    .btn-previous {
+        &.active + .service-list {
+            display: block;
+        }
+    }
+}
+
+.header-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.service-list {
+    display: none;
+    top: calc(4.2rem + 0.4rem);
+    left: 50%;
+    transform: translateX(-50%);
+}
