@@ -97,7 +97,7 @@
             gap: 0.7rem;
         }
 
-        .data-set {
+        .data-line {
             display: flex;
             align-items: center;
             gap: 0.7rem;
@@ -137,7 +137,8 @@
             }
         }
 
-        .data-set.no-line {
+        .data-line.data-ceo,
+        .data-line.data-involved {
             &::after {
                 display: none;
             }

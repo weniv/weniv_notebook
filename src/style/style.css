@@ -1004,11 +1004,11 @@ button {
       display: flex;
       align-items: center;
       gap: 0.7rem; }
-    .weniv-info dl .data-set {
+    .weniv-info dl .data-line {
       display: flex;
       align-items: center;
       gap: 0.7rem; }
-      .weniv-info dl .data-set::after {
+      .weniv-info dl .data-line::after {
         content: '';
         display: block;
         height: 1.2rem;
@@ -1030,7 +1030,8 @@ button {
             mask-image: url(../assets/icon/icon-up.svg); }
           .weniv-info .info-toggle-btn.active + dl {
             display: flex; }
-      .weniv-info .data-set.no-line::after {
+      .weniv-info .data-line.data-ceo::after,
+      .weniv-info .data-line.data-involved::after {
         display: none; } }
 
 .footer-top,
