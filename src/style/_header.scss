@@ -3,6 +3,10 @@
     height: 7rem;
     z-index: 10;
 
+    h1 a {
+        display: flex;
+    }
+
     .header-btn-list {
         display: flex;
         align-items: center;
@@ -16,6 +20,24 @@
     .btn-previous {
         &.active + .service-list {
             display: block;
+        }
+    }
+
+    .logo-svg {
+        .path-weniv {
+            fill: var(--ColorPrimary);
+        }
+
+        .path-notebook {
+            fill: var(--ColorGrayLv4);
+        }
+    }
+
+    @media (max-width: 780px) {
+        height: 5.6rem;
+
+        .header-btn-list {
+            gap: 1.2rem;
         }
     }
 }

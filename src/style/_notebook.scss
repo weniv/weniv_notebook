@@ -60,14 +60,14 @@
 }
 
 .py-repl-editor {
-    // border-radius: 0.8rem;
-    // border: 1px solid var(--ColorGrayLv2);
-    // background: var(--ColorGrayLv1);
     border: none;
 }
 
-.ͼ1 {
-    // overflow: hidden;
+.py-repl-box {
+    &.focused {
+        border-radius: 0.8rem;
+        outline: 2px solid var(--ColorPrimary);
+    }
 }
 
 .ͼ1 .cm-scroller {
@@ -79,9 +79,7 @@
 }
 
 .ͼ1.cm-focused {
-    border-radius: 0.8rem;
-    // outline: none;
-    outline: 2px solid var(--ColorPrimary);
+    outline: none;
 }
 
 .ͼ1 .cm-foldGutter {
@@ -227,6 +225,7 @@
 
     &:empty {
         padding: 0;
+        border: none;
     }
 }
 

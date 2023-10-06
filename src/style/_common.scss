@@ -1,6 +1,15 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap');
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 html {
     font-size: 10px;
 }
@@ -51,6 +60,10 @@ button {
     width: 119rem;
     margin: 0 auto;
     max-width: calc(100% - 6rem);
+
+    @media (max-width: 550px) {
+        max-width: calc(100% - 3.2rem);
+    }
 }
 
 /* basic 버튼 */
@@ -361,5 +374,53 @@ button {
         &:hover {
             background: var(--ColorActivation);
         }
+    }
+}
+
+/* 툴팁 */
+.show-tooltip {
+    position: relative;
+}
+
+.tooltip {
+    position: absolute;
+    display: flex;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.8rem 1.2rem;
+    background: var(--ColorSurface);
+    color: var(--ColorBackground);
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.6rem;
+    border-radius: 0.8rem;
+    width: max-content;
+    max-width: 26rem;
+    word-break: break-word;
+    z-index: 20;
+    animation: fadeIn 0.6s;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -0.4rem;
+        left: 50%;
+        width: 0.85rem;
+        height: 0.85rem;
+        background: inherit;
+        border: inherit;
+        clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
+        transform: translateX(-50%) rotate(135deg);
+        border-radius: 0px 0px 0px 0.2rem;
+    }
+}
+
+.logo-svg {
+    width: 272px;
+    height: 34px;
+
+    @media (max-width: 780px) {
+        width: 209px;
+        height: 26px;
     }
 }

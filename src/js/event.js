@@ -12,12 +12,12 @@ window.addEventListener('load', () => {
         localStorage.setItem('color-theme', 'dark');
         document.documentElement.setAttribute('color-theme', 'dark');
         darkModeButton.classList.add('active');
-        darkModeButton.setAttribute('name', '다크모드 OFF');
+        darkModeButton.dataset.tooltip = 'Dark mode OFF';
     } else {
         localStorage.setItem('color-theme', 'light');
         document.documentElement.setAttribute('color-theme', 'light');
         darkModeButton.classList.remove('active');
-        darkModeButton.setAttribute('name', '다크모드 ON');
+        darkModeButton.dataset.tooltip = 'Dark mode ON';
     }
 });
 
@@ -26,12 +26,13 @@ darkModeButton.addEventListener('click', () => {
         localStorage.setItem('color-theme', 'light');
         document.documentElement.setAttribute('color-theme', 'light');
         darkModeButton.classList.remove('active');
-        darkModeButton.setAttribute('name', '다크모드 ON');
+        darkModeButton.dataset.tooltip = 'Dark mode ON';
     } else {
         localStorage.setItem('color-theme', 'dark');
         document.documentElement.setAttribute('color-theme', 'dark');
         darkModeButton.classList.add('active');
-        darkModeButton.setAttribute('name', '다크모드 OFF');
+
+        darkModeButton.dataset.tooltip = 'Dark mode OFF';
     }
 });
 
@@ -75,4 +76,65 @@ window.addEventListener('click', (e) => {
         previousButton.classList.contains('active') &&
             previousButton.classList.remove('active');
     }
+});
+
+// 툴팁 표시
+const tooltipTargetElement = document.querySelectorAll('.show-tooltip');
+
+const createTooltip = (textContent) => {
+    const tooltipElement = document.createElement('div');
+    tooltipElement.setAttribute('class', 'tooltip');
+    tooltipElement.innerHTML = textContent;
+
+    return tooltipElement;
+};
+
+const addTooltip = (target) => {
+    const textContent = target.dataset.tooltip;
+
+    if (textContent) {
+        const targetHeight = target.clientHeight;
+        const tooltip = createTooltip(textContent);
+        tooltip.style.top = `${targetHeight + 10}px`;
+
+        target.append(tooltip);
+    }
+};
+
+const removeTooltip = (target) => {
+    const tooltip = target.querySelector('.tooltip');
+    tooltip && tooltip.remove();
+};
+
+const addTooltipEvent = (target) => {
+    target.addEventListener(
+        'mouseenter',
+        () => {
+            addTooltip(target);
+        },
+        false,
+    );
+
+    target.addEventListener(
+        'mouseleave',
+        () => {
+            removeTooltip(target);
+        },
+        false,
+    );
+
+    target.addEventListener('click', () => {
+        removeTooltip(target);
+    });
+};
+
+tooltipTargetElement.forEach((target) => {
+    addTooltipEvent(target);
+});
+
+// 위니브 사업자 정보 버튼 토글
+const infoToggleButton = document.querySelector('.info-toggle-btn');
+
+infoToggleButton.addEventListener('click', () => {
+    infoToggleButton.classList.toggle('active');
 });
