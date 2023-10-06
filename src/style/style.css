@@ -266,8 +266,9 @@ button {
   line-height: 2rem;
   color: var(--ColorGrayLv4);
   border: 1px solid var(--ColorGrayLv2); }
-  .basic-white-btn:hover {
-    background: var(--ColorGrayLv2); }
+  @media (hover: hover) and (pointer: fine) {
+    .basic-white-btn:hover {
+      background: var(--ColorGrayLv2); } }
 
 .icon-btn {
   display: flex;
@@ -280,8 +281,9 @@ button {
   line-height: 2rem;
   color: var(--ColorPrimary);
   border: 1px solid var(--ColorGrayLv2); }
-  .icon-btn:hover {
-    border: 1px solid var(--ColorPrimary); }
+  @media (hover: hover) and (pointer: fine) {
+    .icon-btn:hover {
+      border: 1px solid var(--ColorPrimary); } }
   .icon-btn::before {
     content: '';
     display: block;
@@ -318,12 +320,13 @@ button {
     mask-size: 100%;
     mask-repeat: no-repeat;
     mask-position: center center; }
-  .btn-previous:hover {
-    background: var(--ColorActivation); }
   .btn-previous.active {
     background: var(--ColorActivation); }
     .btn-previous.active::before {
       background: var(--ColorPrimary); }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-previous:hover {
+      background: var(--ColorActivation); } }
 
 /* 다크 모드 버튼 */
 .btn-dark-mode {
@@ -383,8 +386,9 @@ button {
   mask-size: 100%;
   mask-repeat: no-repeat;
   mask-position: center center; }
-  .btn-download:hover {
-    background: var(--ColorSurface); }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-download:hover {
+      background: var(--ColorSurface); } }
 
 /* upload 버튼 */
 .btn-upload {
@@ -399,8 +403,9 @@ button {
   mask-size: 100%;
   mask-repeat: no-repeat;
   mask-position: center center; }
-  .btn-upload:hover {
-    background: var(--ColorSurface); }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-upload:hover {
+      background: var(--ColorSurface); } }
 
 /* close 버튼 */
 .btn-close {
@@ -415,8 +420,9 @@ button {
   mask-size: 100%;
   mask-repeat: no-repeat;
   mask-position: center center; }
-  .btn-close:hover {
-    background: var(--ColorSurface); }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-close:hover {
+      background: var(--ColorSurface); } }
 
 /* 재생 버튼 */
 .btn-play {
@@ -464,8 +470,9 @@ button {
   mask-size: 100%;
   mask-repeat: no-repeat;
   mask-position: center center; }
-  .btn-code-download:hover {
-    background: var(--ColorSurface); }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-code-download:hover {
+      background: var(--ColorSurface); } }
 
 /* code import 버튼 */
 .btn-code-upload {
@@ -480,8 +487,9 @@ button {
   mask-size: 100%;
   mask-repeat: no-repeat;
   mask-position: center center; }
-  .btn-code-upload:hover {
-    background: var(--ColorSurface); }
+  @media (hover: hover) and (pointer: fine) {
+    .btn-code-upload:hover {
+      background: var(--ColorSurface); } }
 
 /* btn-link */
 .btn-link {
@@ -541,9 +549,13 @@ button {
     font-weight: 500;
     line-height: 2rem;
     cursor: pointer; }
-    .dropdown-list button:hover,
-    .dropdown-list a:hover {
+    .dropdown-list button:active,
+    .dropdown-list a:active {
       background: var(--ColorActivation); }
+    @media (hover: hover) and (pointer: fine) {
+      .dropdown-list button:hover,
+      .dropdown-list a:hover {
+        background: var(--ColorActivation); } }
 
 /* 툴팁 */
 .show-tooltip {
@@ -561,11 +573,13 @@ button {
   font-weight: 400;
   line-height: 1.6rem;
   border-radius: 0.8rem;
+  text-align: center;
   width: max-content;
   max-width: 26rem;
   word-break: break-word;
   z-index: 20;
-  animation: fadeIn 0.6s; }
+  animation: fadeIn 0.6s;
+  box-sizing: border-box; }
   .tooltip::before {
     content: '';
     position: absolute;
@@ -627,7 +641,8 @@ button {
   position: sticky;
   height: 5rem;
   border-top: 1px solid var(--ColorGrayLv2);
-  border-bottom: 1px solid var(--ColorGrayLv2); }
+  border-bottom: 1px solid var(--ColorGrayLv2);
+  z-index: 1; }
   .main-header .wrap {
     display: flex;
     justify-content: space-between;
@@ -659,8 +674,7 @@ button {
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 2rem;
-  z-index: -1; }
+  line-height: 2rem; }
   .main-notice.show {
     display: flex; }
   .main-notice .notice-close {
@@ -912,11 +926,6 @@ button {
       display: flex; }
 
 .py-error {
-  margin-top: 1.2rem;
-  padding: 1.6rem;
-  border-radius: 8px;
-  border: 2px solid var(--ColorError);
-  background: var(--ColorGrayLv1);
   color: var(--ColorError);
   font-family: Pretendard;
   font-size: 1.6rem;

@@ -40,24 +40,26 @@ const setHeader = (targetNode) => {
         addTooltipEvent(item);
     });
 
-    ul.addEventListener('click', (target) => {
-        switch (target.target.className) {
-            case 'btn-code-download':
-                downloadCode(target);
-                break;
-            case 'btn-code-upload':
-                uploadCode(target);
-                break;
-            case 'btn-close code-delete':
-                // 만약 셀이 하나 밖에 없다면 동작하지 않는다.
-                if (document.querySelectorAll('py-repl').length === 1) {
-                    alert(
-                        '셀이 하나 밖에 없는 경우, 코드를 삭제할 수 없습니다.',
-                    );
-                    return;
-                }
-                deleteCode(target);
-                break;
+    ul.addEventListener('click', (e) => {
+        if (e.target.tagName == 'BUTTON') {
+            switch (e.target.className) {
+                case 'btn-code-download':
+                    downloadCode(e.target);
+                    break;
+                case 'btn-code-upload':
+                    uploadCode(e.target);
+                    break;
+                case 'btn-close code-delete':
+                    // 만약 셀이 하나 밖에 없다면 동작하지 않는다.
+                    if (document.querySelectorAll('py-repl').length === 1) {
+                        alert(
+                            '셀이 하나 밖에 없는 경우, 코드를 삭제할 수 없습니다.',
+                        );
+                        return;
+                    }
+                    deleteCode(e.target);
+                    break;
+            }
         }
     });
 
@@ -78,8 +80,10 @@ const setAddCodeButton = (targetNode) => {
         </button>
     `;
     // 중간 셀 추가 기능
-    buttonContainer.addEventListener('click', (target) => {
-        addCodeNextCellFromSelectCell(target);
+    buttonContainer.addEventListener('click', (e) => {
+        if (e.target.tagName == 'BUTTON') {
+            addCodeNextCellFromSelectCell(e.target);
+        }
     });
 
     pyRepl && pyRepl.after(buttonContainer);

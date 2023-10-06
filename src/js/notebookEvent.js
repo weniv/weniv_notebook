@@ -8,16 +8,17 @@ const addCode = () => {
 
 // 다음셀 추가
 const addCodeNextCellFromSelectCell = (target) => {
-    const selectCell = target.target.parentNode;
+    const notebookSection = document.getElementById('notebookSection');
+    const selectCell = target.parentNode;
     const nextCell = selectCell.nextElementSibling;
     const newCell = document.createElement('py-repl');
     newCell.innerHTML = ``;
-    selectCell.parentNode.insertBefore(newCell, nextCell);
+    notebookSection.insertBefore(newCell, nextCell);
 };
 
 // 코드셀 삭제
 const deleteCode = (target) => {
-    const pyRepl = target.target.closest('py-repl');
+    const pyRepl = target.closest('py-repl');
     const nextpyReplBtnWrapFromPyRepl = pyRepl.nextElementSibling;
     nextpyReplBtnWrapFromPyRepl.remove();
     pyRepl.remove();
@@ -25,7 +26,7 @@ const deleteCode = (target) => {
 
 // 코드 다운로드
 const downloadCode = (target) => {
-    const pyRepl = target.target.closest('py-repl');
+    const pyRepl = target.closest('py-repl');
     const code = pyRepl.querySelector('.cm-content').innerText;
     const blob = new Blob([code], { type: 'text/plain' });
     const link = document.createElement('a');
@@ -36,7 +37,7 @@ const downloadCode = (target) => {
 
 // 코드 업로드
 const uploadCode = (target) => {
-    const pyRepl = target.target.closest('py-repl');
+    const pyRepl = target.closest('py-repl');
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.py';

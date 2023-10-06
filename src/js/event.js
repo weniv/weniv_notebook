@@ -78,6 +78,59 @@ window.addEventListener('click', (e) => {
     }
 });
 
+// tooltip 크기 조절
+const resizeTooltip = (target, ratio) => {
+    const targetWidth = target.clientWidth;
+    const resizedWidth = targetWidth * ratio;
+
+    target.style.width = `${resizedWidth - 24}px`;
+};
+
+const resizeIfHidden = (targetTooltip) => {
+    const tooltipRect = targetTooltip.getBoundingClientRect();
+    const containerRect = document.body.getBoundingClientRect();
+
+    const isPartiallyHiddenOrFullyHidden =
+        tooltipRect.right >= containerRect.right;
+
+    if (isPartiallyHiddenOrFullyHidden) {
+        const term = tooltipRect.right - containerRect.right;
+        const visibleRatio = 1 - term / tooltipRect.width;
+        resizeTooltip(targetTooltip, visibleRatio);
+    } else {
+        targetTooltip.style.width = 'max-content';
+    }
+};
+
+const resizeObserver = new ResizeObserver(() => {
+    const tooltip = document.querySelector('.tooltip');
+    if (tooltip) {
+        resizeIfHidden(tooltip);
+    }
+});
+
+const observerCallback = (entries, observer) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            const intersectionRatio = entry.intersectionRatio;
+            if (intersectionRatio < 1) {
+                console.log(entry.target);
+                resizeTooltip(entry.target, intersectionRatio);
+            }
+        } else {
+            entry.target.style.width = 'max-content';
+        }
+    });
+};
+
+const tooltipIntersectionObserver = new IntersectionObserver(observerCallback, {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1,
+});
+
+resizeObserver.observe(window.document.body);
+
 // 툴팁 표시
 const tooltipTargetElement = document.querySelectorAll('.show-tooltip');
 
@@ -96,6 +149,8 @@ const addTooltip = (target) => {
         const targetHeight = target.clientHeight;
         const tooltip = createTooltip(textContent);
         tooltip.style.top = `${targetHeight + 10}px`;
+
+        tooltipIntersectionObserver.observe(tooltip);
 
         target.append(tooltip);
     }

@@ -3,6 +3,7 @@
     height: 5rem;
     border-top: 1px solid var(--ColorGrayLv2);
     border-bottom: 1px solid var(--ColorGrayLv2);
+    z-index: 1;
 
     .wrap {
         display: flex;
@@ -42,7 +43,6 @@
     font-style: normal;
     font-weight: 500;
     line-height: 2rem;
-    z-index: -1;
 
     &.show {
         display: flex;

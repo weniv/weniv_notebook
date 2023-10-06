@@ -35412,12 +35412,17 @@ ${mountName} = Element("${el.id}")`;
                         ...defaultKeymap,
                         {
                             key: 'Ctrl-Enter',
-                            run: this.execute.bind(this),
+                            run: this.execute.bind(this, false),
                             preventDefault: true,
                         },
                         {
                             key: 'Shift-Enter',
-                            run: this.execute.bind(this),
+                            run: this.execute.bind(this, false),
+                            preventDefault: true,
+                        },
+                        {
+                            key: 'Alt-Enter',
+                            run: this.execute.bind(this, true),
                             preventDefault: true,
                         },
                     ]),
@@ -35465,8 +35470,13 @@ ${mountName} = Element("${el.id}")`;
                     'aria-label',
                     'Python Script Run Button',
                 );
-                runButton.addEventListener('click', this.execute.bind(this));
-                return runButton;
+                runButton.addEventListener(
+                    'click',
+                    this.execute.bind(this, false),
+                );
+
+                this.runButton = runButton;
+                return this.runButton;
             }
             makeOutDiv() {
                 const outDiv = document.createElement('div');
@@ -35485,7 +35495,8 @@ ${mountName} = Element("${el.id}")`;
             /** Execute the python code written in the editor, and automatically
              *  display() the last evaluated expression
              */
-            async execute() {
+            async execute(auto = true) {
+                // this.runButton.classList.add('pause');
                 const pySrc = this.getPySrc();
                 const outEl = this.outDiv;
                 await app.plugins.beforePyReplExec({
@@ -35502,19 +35513,28 @@ ${mountName} = Element("${el.id}")`;
                     pyReplTag: this,
                     result,
                 });
+
                 await interpreter2._remote.destroyIfProxy(result);
-                this.autogenerateMaybe();
+
+                // try {
+                //     await interpreter2._remote.destroyIfProxy(result);
+                // } catch {
+                //     this.runButton.classList.remove('pause');
+                // } finally {
+                //     this.runButton.classList.remove('pause');
+                // }
+
+                this.autogenerateMaybe(this, auto);
             }
             getPySrc() {
                 return this.editor.state.doc.toString();
             }
             // XXX the autogenerate logic is very messy. We should redo it, and it
             // should be the default.
-            autogenerateMaybe() {
-                if (this.hasAttribute('auto-generate')) {
-                    const allPyRepls = $$(
-                        `py-repl[root='${this.getAttribute('root')}'][exec-id]`,
-                        document,
+            autogenerateMaybe(target = null, auto = true) {
+                if (auto) {
+                    const allPyRepls = Array.from(
+                        document.querySelectorAll('py-repl'),
                     );
                     const lastRepl = allPyRepls[allPyRepls.length - 1];
                     const lastExecId = lastRepl.getAttribute('exec-id');
@@ -35533,13 +35553,27 @@ ${mountName} = Element("${el.id}")`;
                     }
                     newPyRepl.id =
                         this.getAttribute('root') + '-' + nextExecId.toString();
-                    if (this.hasAttribute('auto-generate')) {
+                    if (auto) {
                         newPyRepl.setAttribute('auto-generate', '');
                         this.removeAttribute('auto-generate');
                     }
                     newPyRepl.setAttribute('exec-id', nextExecId.toString());
+
                     if (this.parentElement) {
-                        this.parentElement.appendChild(newPyRepl);
+                        if (
+                            allPyRepls.length - 1 >=
+                            allPyRepls.indexOf(target)
+                        ) {
+                            const nextSibling =
+                                allPyRepls[allPyRepls.indexOf(target) + 1];
+
+                            this.parentElement.insertBefore(
+                                newPyRepl,
+                                nextSibling,
+                            );
+                        } else {
+                            this.parentElement.appendChild(newPyRepl);
+                        }
                     }
                 }
             }

@@ -87,8 +87,10 @@ button {
     color: var(--ColorGrayLv4);
     border: 1px solid var(--ColorGrayLv2);
 
-    &:hover {
-        background: var(--ColorGrayLv2);
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            background: var(--ColorGrayLv2);
+        }
     }
 }
 
@@ -104,8 +106,10 @@ button {
     color: var(--ColorPrimary);
     border: 1px solid var(--ColorGrayLv2);
 
-    &:hover {
-        border: 1px solid var(--ColorPrimary);
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            border: 1px solid var(--ColorPrimary);
+        }
     }
 
     &::before {
@@ -139,15 +143,17 @@ button {
         );
     }
 
-    &:hover {
-        background: var(--ColorActivation);
-    }
-
     &.active {
         background: var(--ColorActivation);
 
         &::before {
             background: var(--ColorPrimary);
+        }
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            background: var(--ColorActivation);
         }
     }
 }
@@ -211,8 +217,10 @@ button {
         '../assets/icon/icon-file-download.svg'
     );
 
-    &:hover {
-        background: var(--ColorSurface);
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            background: var(--ColorSurface);
+        }
     }
 }
 
@@ -225,8 +233,10 @@ button {
         '../assets/icon/icon-file-upload.svg'
     );
 
-    &:hover {
-        background: var(--ColorSurface);
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            background: var(--ColorSurface);
+        }
     }
 }
 
@@ -236,8 +246,10 @@ button {
     height: 2rem;
     @include mask-image(var(--ColorGrayLv3), '../assets/icon/icon-close.svg');
 
-    &:hover {
-        background: var(--ColorSurface);
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            background: var(--ColorSurface);
+        }
     }
 }
 
@@ -284,8 +296,10 @@ button {
         '../assets/icon/icon-code-download.svg'
     );
 
-    &:hover {
-        background: var(--ColorSurface);
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            background: var(--ColorSurface);
+        }
     }
 }
 
@@ -298,8 +312,10 @@ button {
         '../assets/icon/icon-code-upload.svg'
     );
 
-    &:hover {
-        background: var(--ColorSurface);
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            background: var(--ColorSurface);
+        }
     }
 }
 
@@ -371,8 +387,14 @@ button {
         line-height: 2rem;
         cursor: pointer;
 
-        &:hover {
+        &:active {
             background: var(--ColorActivation);
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                background: var(--ColorActivation);
+            }
         }
     }
 }
@@ -394,11 +416,13 @@ button {
     font-weight: 400;
     line-height: 1.6rem;
     border-radius: 0.8rem;
+    text-align: center;
     width: max-content;
     max-width: 26rem;
     word-break: break-word;
     z-index: 20;
     animation: fadeIn 0.6s;
+    box-sizing: border-box;
 
     &::before {
         content: '';
