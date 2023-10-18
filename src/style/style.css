@@ -886,13 +886,17 @@ button {
   font-size: 1.6rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 2.2rem; }
+  line-height: 2.2rem;
+  word-break: break-word; }
   .py-repl-output:empty {
     padding: 0;
     border: none; }
 
 .py-error {
-  overflow-x: auto; }
+  overflow-x: auto;
+  background: transparent;
+  color: var(--ColorError);
+  border: none; }
 
 .py-repl-btn-wrap {
   position: relative;
@@ -924,14 +928,6 @@ button {
     background: var(--ColorGrayLv2); }
     .py-repl-btn-wrap:hover .btn-add-code {
       display: flex; }
-
-.py-error {
-  color: var(--ColorError);
-  font-family: Pretendard;
-  font-size: 1.6rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 2.2rem; }
 
 .footer {
   padding: 6rem 0;
