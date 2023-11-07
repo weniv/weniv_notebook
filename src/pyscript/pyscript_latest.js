@@ -33331,15 +33331,15 @@ ${mountName} = Element("${el.id}")`;
               preventDefault: true,
             },
             {
+              key: 'Alt-Enter',
+              run: this.execute.bind(this),
+              preventDefault: true,
+            },
+            {
               key: 'Shift-Enter',
               run: this.execute.bind(this),
               preventDefault: true,
             },
-            // {
-            //   key: 'Alt-Enter',
-            //   run: this.execute.bind(this),
-            //   preventDefault: true,
-            // },
           ]),
         ];
         if (this.getAttribute('theme') === 'dark') {
